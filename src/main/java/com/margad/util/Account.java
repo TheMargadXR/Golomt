@@ -1,14 +1,19 @@
 package com.margad.util;
 
-public class Account {
+import com.margad.model.Bank;
+
+public class Account extends Bank {
     private String accountID;
     private String currency;
     private double balance;
 
-    public Account(String accountID, String currency, double balance) {
+
+    public Account(String accountID, String currency, double balance , String bankID , String bankName) {
+        super(bankID, bankName);
         this.accountID = accountID;
         this.currency = currency;
         this.balance = balance;
+
     }
 
     public String getAccountID() {
@@ -34,4 +39,6 @@ public class Account {
     public void setBalance(double balance) {
         this.balance = balance;
     }
+
+
 }
