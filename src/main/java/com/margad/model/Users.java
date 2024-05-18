@@ -20,7 +20,7 @@ public class Users {
     private List<Transaction> transactions;
     private List<FrequencyTransaction> frequencies;
 
-    public Users(Date userCreatedDate, String password, String userName, String lastName, String firstName, String userID) {
+    public Users() {
         this.userCreatedDate = userCreatedDate;
         this.password = password;
         this.userName = userName;
@@ -28,6 +28,7 @@ public class Users {
         this.firstName = firstName;
         this.userID = userID;
     }
+
 
     public String getUserName() {
         return userName;
