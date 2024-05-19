@@ -1,9 +1,9 @@
 package com.margad.repository;
 
-import com.margad.model.Users;
+import com.margad.model.Bank;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UsersRepository extends MongoRepository<Users , String>  {
+public interface BankRepository extends MongoRepository<Bank, String> {
 }

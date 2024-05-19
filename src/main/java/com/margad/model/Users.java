@@ -4,6 +4,8 @@ import com.margad.util.Account;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.xml.crypto.Data;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -15,20 +17,49 @@ public class Users {
     private String lastName;
     private String userName;
     private String password;
+    private String token;
+    private String salt;
     private Date userCreatedDate;
     private List<Account> accounts;
     private List<Transaction> transactions;
     private List<FrequencyTransaction> frequencies;
 
-    public Users() {
-        this.userCreatedDate = userCreatedDate;
-        this.password = password;
-        this.userName = userName;
-        this.lastName = lastName;
+
+    public Users(){}
+
+
+    public Users(String salt, List<Account> accounts, String firstName, List<FrequencyTransaction> frequencies, String lastName, String password, String token, List<Transaction> transactions, Date userCreatedDate, String userID, String userName) {
+        Date dNow = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("yyMMddhhmmssMs");
+        String dateTime = ft.format(dNow);
+        this.salt = salt;
+        this.accounts = accounts;
         this.firstName = firstName;
-        this.userID = userID;
+        this.frequencies = frequencies;
+        this.lastName = lastName;
+        this.password = password;
+        this.token = token;
+        this.transactions = transactions;
+        this.userCreatedDate = userCreatedDate;
+        this.userID = dateTime;
+        this.userName = userName;
     }
 
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public String getUserName() {
         return userName;
