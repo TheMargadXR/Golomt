@@ -8,7 +8,7 @@ import java.util.Date;
 @Document(collection = "frequencies")
 public class FrequencyTransaction {
     @Id
-    private String ID;
+    private String frequencyTransactionID;
     private boolean active;
     private String transferAccount;
     private String transferBank;
@@ -25,9 +25,9 @@ public class FrequencyTransaction {
         MONTH,
     }
 
-    public FrequencyTransaction(String currency, String ID, boolean active, String transferAccount, String transferBank, String recipientAccount, String recipientBank, double frequencyAmount, Date createdDate, Date transactionDate , String transactionDescription) {
+    public FrequencyTransaction(String currency, String frequencyTransactionID, boolean active, String transferAccount, String transferBank, String recipientAccount, String recipientBank, double frequencyAmount, Date createdDate, Date transactionDate , String transactionDescription) {
         this.currency = currency;
-        this.ID = ID;
+        this.frequencyTransactionID = frequencyTransactionID;
         this.active = active;
         this.transferAccount = transferAccount;
         this.transferBank = transferBank;
@@ -48,11 +48,11 @@ public class FrequencyTransaction {
     }
 
     public String getID() {
-        return ID;
+        return frequencyTransactionID;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setID(String frequencyTransactionID) {
+        this.frequencyTransactionID = frequencyTransactionID;
     }
 
     public boolean isActive() {

@@ -3,32 +3,32 @@ package com.margad.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Collection;
-
 @Document(collection = "bank")
 public class Bank {
-    @Id
-    private String ID;
-    private String name;
+    private String bankID;
+    private String bankName;
 
-    public Bank(String ID, String name) {
-        this.ID = ID;
-        this.name = name;
+    public Bank() {
     }
 
-    public String getID() {
-        return ID;
+    public Bank(String bankID, String bankName) {
+        this.bankID = bankID;
+        this.bankName = bankName;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public String getBankID() {
+        return bankID;
     }
 
-    public String getName() {
-        return name;
+    public void setBankID(String bankID) {
+        this.bankID = bankID;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
     }
 }

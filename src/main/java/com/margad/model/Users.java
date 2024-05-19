@@ -4,7 +4,6 @@ import com.margad.util.Account;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.xml.crypto.Data;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -24,9 +23,8 @@ public class Users {
     private List<Transaction> transactions;
     private List<FrequencyTransaction> frequencies;
 
-
-    public Users(){}
-
+    public Users() {
+    }
 
     public Users(String salt, List<Account> accounts, String firstName, List<FrequencyTransaction> frequencies, String lastName, String password, String token, List<Transaction> transactions, Date userCreatedDate, String userID, String userName) {
         Date dNow = new Date();
@@ -44,6 +42,8 @@ public class Users {
         this.userID = dateTime;
         this.userName = userName;
     }
+
+    // Getters and setters...
 
     public String getSalt() {
         return salt;

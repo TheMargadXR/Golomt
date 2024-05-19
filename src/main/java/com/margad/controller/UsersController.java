@@ -1,27 +1,30 @@
 package com.margad.controller;
 
 import com.margad.model.Users;
-import com.margad.repository.UsersRepository;
+import com.margad.service.Users.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
 public class UsersController {
     @Autowired
-    private UsersRepository usersRepository;
+    private UsersService usersService;
 
-    @PostMapping("/add")
-    public String addUser(@RequestParam String username, @RequestParam String password) {
+    @PostMapping("/signup")
+    public String add(@RequestBody Users user) {
         try {
-            Users user = new Users();
-            user.setUserID("10008");
-            user.setUserName(username);
-            user.setPassword(password);
-            usersRepository.insert(user);
+            usersService.saveUsers(user);
             return "Амжилттай";
         } catch (Exception e) {
             return "Алдаа : " + e.getMessage();
         }
+    }
+
+    @GetMapping("/users")
+    public List<Users> getAllUsers() {
+        return usersService.getAllUsers();
     }
 }
