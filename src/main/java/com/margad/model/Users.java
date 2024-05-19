@@ -16,34 +16,33 @@ public class Users {
     private String lastName;
     private String userName;
     private String password;
+    private String email;
     private String token;
     private String salt;
-    private Date userCreatedDate;
+    private String userCreatedDate;
     private List<Account> accounts;
     private List<Transaction> transactions;
     private List<FrequencyTransaction> frequencies;
 
+
+
+
     public Users() {
+        this("", "", "", "", "", "", "", "", null, null, null);
     }
 
-    public Users(String salt, List<Account> accounts, String firstName, List<FrequencyTransaction> frequencies, String lastName, String password, String token, List<Transaction> transactions, Date userCreatedDate, String userID, String userName) {
-        Date dNow = new Date();
-        SimpleDateFormat ft = new SimpleDateFormat("yyMMddhhmmssMs");
-        String dateTime = ft.format(dNow);
+    public Users(String salt, String firstName, String lastName, String password, String token, String userID, String userName, String userCreatedDate, List<Account> accounts, List<Transaction> transactions, List<FrequencyTransaction> frequencies) {
         this.salt = salt;
-        this.accounts = accounts;
         this.firstName = firstName;
-        this.frequencies = frequencies;
         this.lastName = lastName;
         this.password = password;
         this.token = token;
-        this.transactions = transactions;
-        this.userCreatedDate = userCreatedDate;
-        this.userID = dateTime;
         this.userName = userName;
+        this.accounts = accounts;
+        this.transactions = transactions;
+        this.frequencies = frequencies;
     }
 
-    // Getters and setters...
 
     public String getSalt() {
         return salt;
@@ -101,13 +100,6 @@ public class Users {
         this.password = password;
     }
 
-    public Date getUserCreatedDate() {
-        return userCreatedDate;
-    }
-
-    public void setUserCreatedDate(Date userCreatedDate) {
-        this.userCreatedDate = userCreatedDate;
-    }
 
     public List<Account> getAccounts() {
         return accounts;
@@ -131,5 +123,21 @@ public class Users {
 
     public void setFrequencies(List<FrequencyTransaction> frequencies) {
         this.frequencies = frequencies;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getUserCreatedDate() {
+        return userCreatedDate;
+    }
+
+    public void setUserCreatedDate(String userCreatedDate) {
+        this.userCreatedDate = userCreatedDate;
     }
 }

@@ -10,11 +10,9 @@ import java.util.Date;
 public class Admin {
     @Id
     private String ID;
-    private String firstName;
-    private String lastName;
+    private String firstName, lastName, userName , password;
     private Date accountCreatedDate;
-    private String userName;
-    private String password;
+
 
     public Admin(String ID, Date accountCreatedDate, String firstName, String lastName, String password, String userName) {
         this.ID = ID;
