@@ -8,7 +8,6 @@ public class Account extends Bank {
     private String currency;
     private double balance;
 
-    // Default constructor
     public Account() {
         super();
     }

@@ -3,6 +3,8 @@ package com.margad.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Document(collection = "transactions")
 public class Transaction {
     @Id
@@ -14,8 +16,15 @@ public class Transaction {
     private double transactionAmount;
     private String currency;
     private String transactionDescription;
+    private Date transactionDate;
+    private Boolean income;
 
-    public Transaction( String currency, double transactionAmount, String recipientBank, String recipientAccount, String transderBank, String transferAccount, String transcationID , String transactionDescription) {
+    public Transaction() {
+        this("", 0.0, "", "", "", "", "", "", "", false);
+    }
+
+
+    public Transaction(String currency, double transactionAmount, String recipientBank, String recipientAccount, String transderBank, String transferAccount, String transcationID , String transactionDescription, Object o, boolean b ) {
         this.currency = currency;
         this.transactionAmount = transactionAmount;
         this.recipientBank = recipientBank;
@@ -24,6 +33,8 @@ public class Transaction {
         this.transferAccount = transferAccount;
         this.transcationID = transcationID;
         this.transactionDescription = transactionDescription;
+        this.transactionDate = transactionDate;
+        this.income = income;
     }
 
     public double getTransactionAmount() {
@@ -96,5 +107,21 @@ public class Transaction {
 
     public void setTranscationID(String transcationID) {
         this.transcationID = transcationID;
+    }
+
+    public Date getTransactionDate() {
+        return transactionDate;
+    }
+
+    public void setTransactionDate(Date transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    public Boolean getIncome() {
+        return income;
+    }
+
+    public void setIncome(Boolean income) {
+        this.income = income;
     }
 }

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@CrossOrigin(origins = "*" , allowedHeaders = "*")
 @RestController
 @RequestMapping("/user")
 public class UsersController {
@@ -39,6 +40,7 @@ public class UsersController {
             user.setSalt(salt);
             user.setPassword(PasswordUtils.generateSecurePassword(scheme.getPassword() , salt));
 
+            System.out.println(scheme);
             //User account create
             usersService.saveUsers(user);
             return ResponseScheme.getInstance(true , "successAccountCreated");
@@ -50,6 +52,8 @@ public class UsersController {
     @PostMapping("/login")
     public LoginResponse login(@RequestBody UsersScheme scheme) {
         try {
+            System.out.println("scheme : " + scheme.getUserName());
+            System.out.println("scheme : " + scheme.getPassword());
             List<Users> userList = new ArrayList<>();
             userList = usersService.getAllUsers();
             for(Users user : userList){
@@ -59,8 +63,9 @@ public class UsersController {
                         String token = PasswordUtils.generateSecurePassword(user.getUserID() + user.getPassword() , salt);
                         user.setToken(token);
                         usersService.saveUsers(user);
-                        return new LoginResponse(token);
+                        return new LoginResponse(true, "passwordCorrected" , token);
                     }
+                    return  new LoginResponse(false , "passwordInCorrect");
                 }
             }
             throw new Exception("Username or password inCorrected");
@@ -68,8 +73,6 @@ public class UsersController {
             return new LoginResponse(false , e.getMessage());
         }
     }
-
-
 
     @GetMapping("/users")
     public List<Users> getAllUsers() {

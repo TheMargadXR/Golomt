@@ -1,8 +1,12 @@
 package com.margad.scheme;
 
+import java.util.Date;
+
 public class TransactionScheme {
-    private String transferAccount , transferBank , recipientAccount , recipientBank , currency , transactionDescription;
+    private String transferAccount , transferBank , recipientAccount , recipientBank , currency , transactionDescription ,token;
     private double transactionAmount;
+    private Date transactionDate;
+    private Boolean income;
 
     public String getRecipientAccount() {
         return recipientAccount;
@@ -58,5 +62,29 @@ public class TransactionScheme {
 
     public void setTransferBank(String transferBank) {
         this.transferBank = transferBank;
+    }
+
+    public Date getTransactionDate() {
+        return transactionDate;
+    }
+
+    public void setTransactionDate(Date transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public Boolean getIncome() {
+        return income;
+    }
+
+    public void setIncome(Boolean income) {
+        this.income = income;
     }
 }
