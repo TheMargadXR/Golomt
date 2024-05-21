@@ -53,8 +53,6 @@ public class UsersController {
     @PostMapping("/login")
     public LoginResponse login(@RequestBody UsersScheme scheme) {
         try {
-            System.out.println("scheme : " + scheme.getUserName());
-            System.out.println("scheme : " + scheme.getPassword());
             List<Users> userList = new ArrayList<>();
             userList = usersService.getAllUsers();
             for(Users user : userList){
@@ -84,7 +82,7 @@ public class UsersController {
                 return ResponseScheme.getInstance(false , "tokenNull");
             } else {
                 Account account = new Account();
-                Integer accountID = usersService.getUserAccountsLength(scheme.getToken()) + 1;
+                Integer accountID = usersService.getUserAccountsLength(scheme.getToken()) + 2;
                 accountID += 1;
                 String accountIDadd = user.getUserID() + "" +accountID.toString();
                 account.setAccountID(accountIDadd);
@@ -103,6 +101,23 @@ public class UsersController {
             }
         } catch (Exception e) {
             return ResponseScheme.getInstance(false, e.getMessage());
+        }
+    }
+
+    @GetMapping("/userdata")
+    public Users getUserData(@RequestParam String token) {
+        try {
+            Users userData = usersService.findByToken(token);
+            if (userData != null) {
+                userData.setPassword("");
+                userData.setSalt("");
+                userData.setUserID("");
+                return userData;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
         }
     }
 
