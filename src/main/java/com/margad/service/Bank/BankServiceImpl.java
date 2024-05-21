@@ -22,5 +22,9 @@ public class BankServiceImpl implements BankService{
     public List<Bank> getAllBank(){
         return bankRepository.findAll();
     }
+    @Override
+    public Bank findByBankID(String bankID){
+        return bankRepository.findByBankID(bankID);
+    }
 
 }

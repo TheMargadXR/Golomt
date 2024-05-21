@@ -1,7 +1,10 @@
 package com.margad.scheme;
 
+import com.margad.util.Account;
+
 public class UsersScheme {
-    private String firstName , lastName , userName , password , email , salt;
+    private String firstName , lastName , userName , password , email , salt , token , bankID , currency , bankName;
+    private Account account;
 
     public String getFirstName() {
         return firstName;
@@ -49,5 +52,45 @@ public class UsersScheme {
 
     public void setSalt(String salt) {
         this.salt = salt;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public String getBankID() {
+        return bankID;
+    }
+
+    public void setBankID(String bankID) {
+        this.bankID = bankID;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 }

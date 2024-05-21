@@ -10,7 +10,7 @@ public class Transaction {
     @Id
     private String transcationID;
     private String transferAccount;
-    private String transderBank;
+    private String transferBank;
     private String recipientAccount;
     private String recipientBank;
     private double transactionAmount;
@@ -24,12 +24,12 @@ public class Transaction {
     }
 
 
-    public Transaction(String currency, double transactionAmount, String recipientBank, String recipientAccount, String transderBank, String transferAccount, String transcationID , String transactionDescription, Object o, boolean b ) {
+    public Transaction(String currency, double transactionAmount, String recipientBank, String recipientAccount, String transferBank, String transferAccount, String transcationID , String transactionDescription, Object o, boolean b ) {
         this.currency = currency;
         this.transactionAmount = transactionAmount;
         this.recipientBank = recipientBank;
         this.recipientAccount = recipientAccount;
-        this.transderBank = transderBank;
+        this.transferBank = transferBank;
         this.transferAccount = transferAccount;
         this.transcationID = transcationID;
         this.transactionDescription = transactionDescription;
@@ -61,12 +61,12 @@ public class Transaction {
         this.transferAccount = transferAccount;
     }
 
-    public String getTransderBank() {
-        return transderBank;
+    public String getTransferBank() {
+        return transferBank;
     }
 
-    public void setTransderBank(String transderBank) {
-        this.transderBank = transderBank;
+    public void setTransferBank(String transderBank) {
+        this.transferBank = transderBank;
     }
 
     public String getRecipientAccount() {
@@ -124,4 +124,5 @@ public class Transaction {
     public void setIncome(Boolean income) {
         this.income = income;
     }
+
 }

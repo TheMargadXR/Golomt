@@ -25,8 +25,6 @@ public class Users {
     private List<FrequencyTransaction> frequencies;
 
 
-
-
     public Users() {
         this("", "", "", "", "", "", "", "", null, null, null);
     }

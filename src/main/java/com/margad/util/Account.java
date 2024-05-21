@@ -14,7 +14,7 @@ public class Account extends Bank {
 
     @PersistenceConstructor
     public Account(String accountID, String currency, double balance, String bankID, String bankName) {
-        super();
+        super(bankID,bankName);
         this.accountID = accountID;
         this.currency = currency;
         this.balance = balance;

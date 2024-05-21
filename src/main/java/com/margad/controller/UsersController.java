@@ -1,10 +1,12 @@
 package com.margad.controller;
 
 import com.margad.model.Users;
+import com.margad.repository.UsersRepository;
 import com.margad.scheme.LoginResponse;
 import com.margad.scheme.ResponseScheme;
 import com.margad.scheme.UsersScheme;
 import com.margad.service.Users.UsersService;
+import com.margad.util.Account;
 import com.margad.util.PasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +36,6 @@ public class UsersController {
             user.setLastName(scheme.getLastName());
             user.setEmail(scheme.getEmail());
             user.setUserCreatedDate(dateTime);
-
             // Salt and Password generated
             String salt = PasswordUtils.getSalt(10);
             user.setSalt(salt);
@@ -71,6 +72,37 @@ public class UsersController {
             throw new Exception("Username or password inCorrected");
         } catch (Exception e) {
             return new LoginResponse(false , e.getMessage());
+        }
+    }
+
+
+    @PostMapping("/account")
+    public ResponseScheme createAccount(@RequestBody UsersScheme scheme){
+        try{
+            Users user = usersService.findByToken(scheme.getToken());
+            if (user == null) {
+                return ResponseScheme.getInstance(false , "tokenNull");
+            } else {
+                Account account = new Account();
+                Integer accountID = usersService.getUserAccountsLength(scheme.getToken()) + 1;
+                accountID += 1;
+                String accountIDadd = user.getUserID() + "" +accountID.toString();
+                account.setAccountID(accountIDadd);
+                account.setBalance(0);
+                account.setCurrency(scheme.getCurrency());
+                account.setBankID(scheme.getBankID());
+                account.setBankName(scheme.getBankName());
+                List<Account> accounts = user.getAccounts();
+                if (accounts == null) {
+                    accounts = new ArrayList<>();
+                }
+                accounts.add(account);
+                user.setAccounts(accounts);
+                usersService.saveUsers(user);
+                return ResponseScheme.getInstance(true , "successAccountCreated");
+            }
+        } catch (Exception e) {
+            return ResponseScheme.getInstance(false, e.getMessage());
         }
     }
 

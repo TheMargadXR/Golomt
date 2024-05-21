@@ -8,6 +8,7 @@ public class TransactionScheme {
     private Date transactionDate;
     private Boolean income;
 
+
     public String getRecipientAccount() {
         return recipientAccount;
     }
