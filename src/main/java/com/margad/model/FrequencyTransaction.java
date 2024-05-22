@@ -19,6 +19,8 @@ public class FrequencyTransaction {
     private Date createdDate;
     private Date transactionDate;
     private String transactionDescription;
+    private String startDate , endDate ,frequency;
+
     enum FrequencyChoose{
         DAY,
         WEEK,
@@ -125,5 +127,37 @@ public class FrequencyTransaction {
 
     public void setTransactionDescription(String transactionDescription) {
         this.transactionDescription = transactionDescription;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
+    }
+
+    public String getFrequencyTransactionID() {
+        return frequencyTransactionID;
+    }
+
+    public void setFrequencyTransactionID(String frequencyTransactionID) {
+        this.frequencyTransactionID = frequencyTransactionID;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 }

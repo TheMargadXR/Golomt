@@ -3,7 +3,7 @@ package com.margad.scheme;
 import java.util.Date;
 
 public class TransactionScheme {
-    private String transferAccount , transferBank , recipientAccount , recipientBank , currency , transactionDescription ,token;
+    private String transferAccount , transferBank , recipientAccount , recipientBank , currency , transactionDescription ,token , startDate , endDate , frequency;
     private double transactionAmount;
     private Date transactionDate;
     private Boolean income;
@@ -88,4 +88,33 @@ public class TransactionScheme {
     public void setIncome(Boolean income) {
         this.income = income;
     }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
+    }
+
+    public String getTranscationID() {
+         return transactionDate.toString();
+    }
+
 }

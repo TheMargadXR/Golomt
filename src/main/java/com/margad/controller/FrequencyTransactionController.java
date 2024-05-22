@@ -4,8 +4,10 @@ import com.margad.model.FrequencyTransaction;
 import com.margad.model.Transaction;
 import com.margad.model.Users;
 import com.margad.repository.UsersRepository;
+import com.margad.scheme.FrequencyTransactionScheme;
 import com.margad.scheme.ResponseScheme;
 import com.margad.scheme.TransactionScheme;
+import com.margad.service.FrenquencyTransaction.FrequencyTransactionService;
 import com.margad.service.Transaction.TransactionService;
 import com.margad.service.Users.UsersService;
 import com.margad.util.Account;
@@ -25,13 +27,16 @@ public class   FrequencyTransactionController {
     private TransactionService transactionService;
 
     @Autowired
+    private FrequencyTransactionService frequencyTransactionService;
+
+    @Autowired
     private UsersService usersService;
 
     @Autowired
     private UsersRepository usersRepository;
 
     @PostMapping("/")
-    public ResponseScheme frequencyTransaction(@RequestBody TransactionScheme scheme) {
+    public ResponseScheme frequencyTransaction(@RequestBody FrequencyTransactionScheme scheme) {
         try {
             Users transferUser = usersService.findUserByAccountID(scheme.getTransferAccount());
             Users recipientUser = usersService.findUserByAccountID(scheme.getRecipientAccount());
@@ -56,7 +61,7 @@ public class   FrequencyTransactionController {
                 transaction.setTransferBank(scheme.getTransferBank());
                 transaction.setRecipientBank(scheme.getRecipientBank());
                 transaction.setCurrency(scheme.getCurrency());
-                transaction.setIncome(scheme.getIncome());
+                transaction.setIncome(true);
                 transactionService.saveTransaction(transaction);
 
                 List<Transaction> transferUserTransactions = transferUser.getTransactions();
@@ -73,17 +78,21 @@ public class   FrequencyTransactionController {
                 recipientUserTransactions.add(transaction);
                 recipientUser.setTransactions(recipientUserTransactions);
 
-                // Add frequency transaction to user's frequency list
                 FrequencyTransaction frequencyTransaction = new FrequencyTransaction(scheme.getCurrency(),
                         transaction.getTranscationID(), true, scheme.getTransferAccount(), scheme.getTransferBank(),
                         scheme.getRecipientAccount(), scheme.getRecipientBank(), scheme.getTransactionAmount(),
                         new Date(), new Date(), scheme.getTransactionDescription());
+                frequencyTransaction.setStartDate(scheme.getStartDate());
+                frequencyTransaction.setEndDate(scheme.getEndDate());
+                frequencyTransaction.setFrequency(scheme.getFrequency());
                 List<FrequencyTransaction> userFrequencies = transferUser.getFrequencies();
                 if (userFrequencies == null) {
                     userFrequencies = new ArrayList<>();
                 }
                 userFrequencies.add(frequencyTransaction);
                 transferUser.setFrequencies(userFrequencies);
+
+                frequencyTransactionService.saveFrequencyTransaction(frequencyTransaction);
 
                 usersRepository.save(transferUser);
                 usersRepository.save(recipientUser);

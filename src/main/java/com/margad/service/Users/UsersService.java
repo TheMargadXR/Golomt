@@ -10,7 +10,6 @@ public interface UsersService {
     public List<Users> getAllUsers();
     Users findByToken(String token);
     int getUserAccountsLength(String token);
-    Account findAccountByAccountID(String accountID);
 
     Users findUserByAccountID(String accountID);
 }

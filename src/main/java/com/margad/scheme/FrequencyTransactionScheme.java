@@ -4,9 +4,12 @@ import java.util.Date;
 
 public class FrequencyTransactionScheme {
     private boolean active;
-    private String transferAccount , transferBank , recipientAccount , recipientBank , currency , transactionDescription;
-    private double frequencyAmount;
+    private String transferAccount , transferBank , recipientAccount , recipientBank , currency , transactionDescription , frequency;
+    private double transactionAmount;
     private Date transactionDate;
+    private String startDate;
+    private String endDate;
+
 
     public Date getTransactionDate() {
         return transactionDate;
@@ -32,12 +35,12 @@ public class FrequencyTransactionScheme {
         this.currency = currency;
     }
 
-    public double getFrequencyAmount() {
-        return frequencyAmount;
+    public double getTransactionAmount() {
+        return transactionAmount;
     }
 
-    public void setFrequencyAmount(double frequencyAmount) {
-        this.frequencyAmount = frequencyAmount;
+    public void setTransactionAmount(double frequencyAmount) {
+        this.transactionAmount = frequencyAmount;
     }
 
     public String getRecipientAccount() {
@@ -78,5 +81,29 @@ public class FrequencyTransactionScheme {
 
     public void setTransferBank(String transferBank) {
         this.transferBank = transferBank;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
     }
 }

@@ -23,10 +23,8 @@ public class BankController {
     @PostMapping("/")
     public ResponseScheme addBankAccount(@RequestBody BankScheme scheme){
         try{
-
             String bankID = scheme.getBankID();
             Bank bankCheck = bankService.findByBankID(bankID);
-
             if(bankCheck!=null){
                 return ResponseScheme.getInstance(false,"BankIDisAllreadyUsed");
             }else{
@@ -36,7 +34,6 @@ public class BankController {
                 bankService.saveBank(bank);
                 return ResponseScheme.getInstance(true,"SuccessAccountCreated");
             }
-
         }catch(Exception e){
             return ResponseScheme.getInstance(false, e.getMessage());
         }

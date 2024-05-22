@@ -26,6 +26,10 @@ public class UsersController {
     @PostMapping("/signup")
     public ResponseScheme signup(@RequestBody UsersScheme scheme) {
         try {
+            if (!isValidPassword(scheme.getPassword())) {
+                return ResponseScheme.getInstance(false, "PasswordNotSecure");
+            }
+
             Date dNow = new Date();
             SimpleDateFormat ft = new SimpleDateFormat("yyMMddhhmmssMs");
             String dateTime = ft.format(dNow);
@@ -39,16 +43,21 @@ public class UsersController {
             // Salt and Password generated
             String salt = PasswordUtils.getSalt(10);
             user.setSalt(salt);
-            user.setPassword(PasswordUtils.generateSecurePassword(scheme.getPassword() , salt));
+            user.setPassword(PasswordUtils.generateSecurePassword(scheme.getPassword(), salt));
 
             System.out.println(scheme);
             //User account create
             usersService.saveUsers(user);
-            return ResponseScheme.getInstance(true , "successAccountCreated");
+            return ResponseScheme.getInstance(true, "successAccountCreated");
         } catch (Exception e) {
             return ResponseScheme.getInstance(false, e.getMessage());
         }
     }
+
+    private boolean isValidPassword(String password) {
+        return password.length() >= 4 && password.matches(".*[!@#$%^&*()-_=+\\\\|\\[{\\]};:'\",<.>/?].*");
+    }
+
 
     @PostMapping("/login")
     public LoginResponse login(@RequestBody UsersScheme scheme) {

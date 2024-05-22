@@ -35,22 +35,6 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public Account findAccountByAccountID(String accountID) {
-        List<Users> usersList = usersRepository.findAll();
-        for (Users user : usersList) {
-            List<Account> accounts = user.getAccounts();
-            if (accounts != null) {
-                for (Account account : accounts) {
-                    if (accountID.equals(account.getAccountID())) {
-                        return account;
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
-    @Override
     public Users findUserByAccountID(String accountID) {
         List<Users> usersList = usersRepository.findAll();
         for (Users user : usersList) {
