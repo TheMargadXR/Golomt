@@ -37,10 +37,10 @@ public class TransactionController {
             Account recipientAccount = findAccountByAccountID(recipientUser, scheme.getRecipientAccount());
 
             if (transferAccount == null || recipientAccount == null) {
-                return ResponseScheme.getInstance(false, "Transfer account or recipient account not found");
+                return ResponseScheme.getInstance(false, "AccountNotFound");
             } else {
                 if (transferAccount.getBalance() < scheme.getTransactionAmount()) {
-                    return ResponseScheme.getInstance(false, "Insufficient balance in transfer account");
+                    return ResponseScheme.getInstance(false, "Insufficient");
                 }
                 transferAccount.setBalance(transferAccount.getBalance() - scheme.getTransactionAmount());
                 recipientAccount.setBalance(recipientAccount.getBalance() + scheme.getTransactionAmount());
@@ -57,15 +57,20 @@ public class TransactionController {
                 transaction.setRecipientBank(scheme.getRecipientBank());
                 transaction.setCurrency(scheme.getCurrency());
                 transaction.setIncome(scheme.getIncome());
-
                 transactionService.saveTransaction(transaction);
+                addTransactionToUser(transferUser, transaction);
+                addTransactionToUser(recipientUser, transaction);
 
-                return ResponseScheme.getInstance(true, "Transaction successful");
+                usersService.saveUsers(transferUser);
+                usersService.saveUsers(recipientUser);
+
+                return ResponseScheme.getInstance(true, "TransactionSuccessful");
             }
         } catch(Exception e){
             return ResponseScheme.getInstance(false, e.getMessage());
         }
     }
+
     private Account findAccountByAccountID(Users user, String accountID) {
         if (user != null && user.getAccounts() != null) {
             for (Account account : user.getAccounts()) {
@@ -75,5 +80,12 @@ public class TransactionController {
             }
         }
         return null;
+    }
+
+    private void addTransactionToUser(Users user, Transaction transaction) {
+        if (user.getTransactions() == null) {
+            user.setTransactions(new ArrayList<>());
+        }
+        user.getTransactions().add(transaction);
     }
 }

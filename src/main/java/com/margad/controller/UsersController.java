@@ -41,12 +41,12 @@ public class UsersController {
             user.setEmail(scheme.getEmail());
             user.setUserCreatedDate(dateTime);
             // Salt and Password generated
+
             String salt = PasswordUtils.getSalt(10);
             user.setSalt(salt);
             user.setPassword(PasswordUtils.generateSecurePassword(scheme.getPassword(), salt));
 
-            System.out.println(scheme);
-            //User account create
+
             usersService.saveUsers(user);
             return ResponseScheme.getInstance(true, "successAccountCreated");
         } catch (Exception e) {
@@ -55,8 +55,21 @@ public class UsersController {
     }
 
     private boolean isValidPassword(String password) {
-        return password.length() >= 4 && password.matches(".*[!@#$%^&*()-_=+\\\\|\\[{\\]};:'\",<.>/?].*");
+        if (password.length() < 8) {
+            return false;
+        }
+        if (!password.matches(".*[!@#$%^&*()-_=+\\\\|\\[{\\]};:'\",<.>/?].*")) {
+            return false;
+        }
+        if (!password.matches(".*[A-Z].*")) {
+            return false;
+        }
+        if (!password.matches(".*[a-z].*")) {
+            return false;
+        }
+        return true;
     }
+
 
 
     @PostMapping("/login")

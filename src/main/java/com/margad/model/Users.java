@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +27,9 @@ public class Users {
 
 
     public Users() {
-        this("", "", "", "", "", "", "", "", null, null, null);
+        this.accounts = new ArrayList<>();
+        this.transactions = new ArrayList<>();
+        this.frequencies = new ArrayList<>();
     }
 
     public Users(String salt, String firstName, String lastName, String password, String token, String userID, String userName, String userCreatedDate, List<Account> accounts, List<Transaction> transactions, List<FrequencyTransaction> frequencies) {
@@ -35,12 +38,13 @@ public class Users {
         this.lastName = lastName;
         this.password = password;
         this.token = token;
+        this.userID = userID;
         this.userName = userName;
-        this.accounts = accounts;
-        this.transactions = transactions;
-        this.frequencies = frequencies;
+        this.userCreatedDate = userCreatedDate;
+        this.accounts = accounts != null ? accounts : new ArrayList<>();
+        this.transactions = transactions != null ? transactions : new ArrayList<>();
+        this.frequencies = frequencies != null ? frequencies : new ArrayList<>();
     }
-
 
     public String getSalt() {
         return salt;
